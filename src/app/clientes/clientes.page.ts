@@ -40,5 +40,4 @@ export class ClientesPage{
       console.log('Processo finalizado!') 
     })
   }
-
 }
