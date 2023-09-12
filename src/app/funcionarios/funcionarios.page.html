@@ -6,22 +6,17 @@
 
 <ion-content [fullscreen]="true">
   <ion-row>
-    <ion-col size="12">
-      <ion-button (click)="this.getFuncionarios()">Consultar Funcionários</ion-button>
-      <ion-spinner *ngIf="this.isLoading"></ion-spinner>
-    </ion-col>
-  </ion-row>
-
-  <ion-row>
-    <ion-col size="8">
+    <ion-col class="ion-justify-content-center" size="8">
       <ion-list>
         <ng-container *ngFor="let funcionario of this.funcionarios">
           <ion-item>
             <ion-label> {{ funcionario.CodFun }} </ion-label>
             <ion-label> {{ funcionario.Nome }} </ion-label>
             <ion-label> {{ funcionario.Sobrenome }} </ion-label>
-            <ion-button>Editar</ion-button>
-            <ion-button >Remover</ion-button>
+            <ion-label> {{ funcionario.Cidade }} </ion-label>
+            <ion-label> {{ funcionario.Fone }} </ion-label>
+            <ion-button >Editar</ion-button>
+            <ion-button (click)="removerFuncionario(funcionario.CodFun)">Remover</ion-button>
           </ion-item>
         </ng-container>
       </ion-list>

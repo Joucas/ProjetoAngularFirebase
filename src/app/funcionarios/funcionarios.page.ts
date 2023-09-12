@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FuncionariosPage {
 
+  constructor(){
+    this.getFuncionarios()
+  }
+
   isLoading: boolean = false
   funcionarios: any = []
 
@@ -21,5 +25,23 @@ export class FuncionariosPage {
       console.log('Funcionol!')
     })
   }
+  
+  removerFuncionario(CodFun: any){
+    this.isLoading = true
+    fetch('http://localhost/api/funcionarios/remover.php', {
+      method: 'POST',
+      headers: {
+        'Content-type' : 'application/json',
+      },
+      body: JSON.stringify({ CodFun: CodFun }),
 
+    })
+    .then(res => res.json())
+    .then(dados => { console.log(dados) })
+    .catch(error => { console.log(error) }) 
+    .finally(() => {
+      this.isLoading = false
+      console.log('Funcionol!')
+    })
+  }
 }
