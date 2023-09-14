@@ -6,8 +6,16 @@
 
 <ion-content [fullscreen]="true">
   <ion-row>
-    <ion-col class="ion-justify-content-center" size="8">
+    <ion-col class="ion-justify-content-center" size="12">
       <ion-list>
+        <ion-item>
+          <ion-label>Código</ion-label>
+          <ion-label>Nome</ion-label>
+          <ion-label>Sobrenome</ion-label>
+          <ion-label>Cidade</ion-label>
+          <ion-label>Fone</ion-label>
+          <ion-label>Cargo</ion-label>
+        </ion-item>
         <ng-container *ngFor="let funcionario of this.funcionarios">
           <ion-item>
             <ion-label> {{ funcionario.CodFun }} </ion-label>
@@ -15,8 +23,24 @@
             <ion-label> {{ funcionario.Sobrenome }} </ion-label>
             <ion-label> {{ funcionario.Cidade }} </ion-label>
             <ion-label> {{ funcionario.Fone }} </ion-label>
-            <ion-button >Editar</ion-button>
-            <ion-button (click)="removerFuncionario(funcionario.CodFun)">Remover</ion-button>
+            <ion-label> {{ funcionario.Cargo }} </ion-label>
+            <ion-button class="ion-margin-end " (click)="setOpenUpdate(true)"><ion-icon name="build-outline"></ion-icon></ion-button>
+            <ion-button (click)="removerFuncionario(funcionario.CodFun)"><ion-icon name="close-circle-outline"></ion-icon></ion-button>
+
+            <ion-modal [isOpen]="isModalOpenUpdate">
+              <ng-template>
+                <ion-header>
+                  <ion-title>Modal</ion-title>
+                  <ion-buttons slot="end">
+                    <ion-button (click)="setOpenUpdate(false)">Close</ion-button>
+                  </ion-buttons>
+                </ion-header>
+                <ion-content>
+                  
+                </ion-content>
+                
+              </ng-template>
+            </ion-modal>
           </ion-item>
         </ng-container>
       </ion-list>

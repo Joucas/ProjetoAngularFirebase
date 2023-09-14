@@ -44,4 +44,23 @@ export class FuncionariosPage {
       console.log('Funcionol!')
     })
   }
+
+  // Button update Funcionario
+
+  //
+  //
+  //
+  // Área para function de update funcionarios
+  //
+  //
+  //
+
+  // Modal update funcionarios
+  isModalOpenUpdate = false;
+
+  setOpenUpdate(isOpen: boolean) {
+    this.isModalOpenUpdate = isOpen;
+  }
+
+
 }
