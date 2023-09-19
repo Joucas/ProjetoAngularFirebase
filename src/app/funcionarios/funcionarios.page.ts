@@ -159,4 +159,10 @@ export class FuncionariosPage {
     })
   }
 
+  // Botao de Consultar por Nome, Cargo, Cidade e Telefone
+  searchData(){
+    
+  }
+
+
 }

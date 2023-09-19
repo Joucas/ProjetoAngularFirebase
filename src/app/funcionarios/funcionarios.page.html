@@ -74,6 +74,23 @@
         </ion-content>
       </ng-template>
     </ion-modal>
+
+      <form action="">
+        <ion-col size="6">
+          <ion-input #input  placeholder="Pesquisar" name="pesquisar"></ion-input>
+        </ion-col>
+        <ion-col size="4">
+          <ion-radio-group>
+            <ion-radio color="success" class="ion-margin" value="nome">Nome</ion-radio>
+            <ion-radio color="success" class="ion-margin" value="cargo">Cargo</ion-radio>
+            <ion-radio color="success" class="ion-margin" value="cidade">Cidade</ion-radio>
+            <ion-radio color="success" class="ion-margin" value="fone">Telefone</ion-radio>
+          </ion-radio-group>
+        </ion-col>
+        <ion-col size="2">
+          <ion-button (click)="searchData()">Buscar</ion-button>
+        </ion-col>
+      </form>
   </ion-row>
 </ion-header>
 
@@ -81,38 +98,34 @@
   <ion-row>
     <ion-col class="ion-justify-content-center" size="12">
       <ion-list>
-        <ion-item>
+        <ion-item class="ion-text-center">
           <ion-label>Código</ion-label>
           <ion-label>Nome</ion-label>
           <ion-label>Sobrenome</ion-label>
           <ion-label>Cidade</ion-label>
           <ion-label>Fone</ion-label>
           <ion-label>Cargo</ion-label>
+          <ion-label>Data de Nascimento</ion-label>
+          <ion-label>Endereço</ion-label>
+          <ion-label>CEP</ion-label>
+          <ion-label>País</ion-label>
+          <ion-label>Salário</ion-label>
         </ion-item>
         <ng-container *ngFor="let funcionario of this.funcionarios">
-          <ion-item>
+          <ion-item class="ion-text-center">
             <ion-label> {{ funcionario.CodFun }} </ion-label>
             <ion-label> {{ funcionario.Nome }} </ion-label>
             <ion-label> {{ funcionario.Sobrenome }} </ion-label>
             <ion-label> {{ funcionario.Cidade }} </ion-label>
             <ion-label> {{ funcionario.Fone }} </ion-label>
             <ion-label> {{ funcionario.Cargo }} </ion-label>
+            <ion-label> {{ funcionario.DataNasc }} </ion-label>
+            <ion-label> {{ funcionario.Endereco }} </ion-label>
+            <ion-label> {{ funcionario.CEP }} </ion-label>
+            <ion-label> {{ funcionario.Pais }} </ion-label>
+            <ion-label> {{ funcionario.Salario }} </ion-label>
             <ion-button class="ion-margin-end " (click)="setOpenInserir(true, funcionario.CodFun) "><ion-icon name="build-outline"></ion-icon></ion-button>
             <ion-button (click)="removerFuncionario(funcionario.CodFun)"><ion-icon name="close-circle-outline"></ion-icon></ion-button>
-
-            <ion-modal [isOpen]="isModalOpenUpdate">
-              <ng-template>
-                <ion-header>
-                  <ion-title>Modal</ion-title>
-                  <ion-buttons slot="end">
-                    <ion-button (click)="setOpenUpdate(false)">Close</ion-button>
-                  </ion-buttons>
-                </ion-header>
-                <ion-content>
-                  
-                </ion-content>
-              </ng-template>
-            </ion-modal>
           </ion-item>
         </ng-container>
       </ion-list>
