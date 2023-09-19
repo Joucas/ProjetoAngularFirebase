@@ -13,7 +13,22 @@ export class FuncionariosPage {
 
   isLoading: boolean = false
   funcionarios: any = []
+  form = {
+    codigo: '',
+    nome: '',
+    sobrenome: '',
+    cidade: '',
+    fone: '',
+    cargo: '',
+    dataNasc: '',
+    endereco: '',
+    cep: '',
+    pais: '',
+    salario: '',
+  }
+  action = 'Inserir';
 
+  // funcao para listar os funcionarios, executo uma funcao do php e pego os dados do bd
   getFuncionarios(){
     this.isLoading = true
     fetch('http://localhost/api/funcionarios/listar.php')
@@ -40,20 +55,58 @@ export class FuncionariosPage {
     .then(dados => { console.log(dados) })
     .catch(error => { console.log(error) }) 
     .finally(() => {
+      this.getFuncionarios()
       this.isLoading = false
       console.log('Funcionol!')
     })
   }
 
-  // Button update Funcionario
+  // Inserir Funcionario
+    // prevent default serve para cacelar o envio do formulario
+    // normalmente usado para deixar as requisicoes assincronas
+    sendData(data: any){
+      data.preventDefault()
 
-  //
-  //
-  //
-  // Área para function de update funcionarios
-  //
-  //
-  //
+      console.log(this.form.nome)
+
+      this.isLoading = true
+      if(this.action == 'Inserir'){
+        fetch('http://localhost/api/funcionarios/inserir.php', {
+          method: 'POST',
+          headers: {
+            'Content-type' : 'application/json',
+          },
+          body: JSON.stringify(this.form),
+  
+        })
+        .then(res => res.json())
+        .then(dados => { console.log(dados) })
+        .catch(error => { console.log(error) }) 
+        .finally(() => {
+          this.getFuncionarios()
+          this.isLoading = false
+          console.log('Funcionol!')
+        })
+      }else{
+        fetch('http://localhost/api/funcionarios/update.php', {
+        method: 'PUT',
+        headers: {
+          'Content-type' : 'application/json',
+        },
+        body: JSON.stringify(this.form),
+
+        })
+        .then(res => res.json())
+        .then(dados => { console.log(dados) })
+        .catch(error => { console.log(error) }) 
+        .finally(() => {
+          this.getFuncionarios()
+          this.isLoading = false
+          console.log('Funcionol!')
+        })
+      }
+    }
+
 
   // Modal update funcionarios
   isModalOpenUpdate = false;
@@ -62,5 +115,48 @@ export class FuncionariosPage {
     this.isModalOpenUpdate = isOpen;
   }
 
+  // Modal Inserir funcionarios
+  isModalOpenInserir = false;
+
+  setOpenInserir(isOpen: boolean, codigo: number | null) {
+    this.isModalOpenInserir = isOpen;
+    console.log(codigo)
+    this.action = 'Inserir'
+    if(codigo){
+      this.getData(codigo)
+      this.action = 'Atualizar'
+    }
+  }
+
+
+  getData(codigo: number){
+    fetch('http://localhost/api/funcionarios/getUpdate.php?codigo=' + codigo, {
+      method: 'GET',
+      headers: {
+        'Content-type' : 'application/json',
+      },
+
+    })
+    .then(res => res.json())
+    .then(dados => { 
+      console.log(dados)
+      this.form.codigo = dados.funcionarios[0].CodFun
+      this.form.nome = dados.funcionarios[0].Nome
+      this.form.sobrenome = dados.funcionarios[0].Sobrenome
+      this.form.cargo = dados.funcionarios[0].Cargo
+      this.form.dataNasc = dados.funcionarios[0].DataNasc
+      this.form.endereco = dados.funcionarios[0].Endereco
+      this.form.cidade = dados.funcionarios[0].Cidade
+      this.form.cep = dados.funcionarios[0].CEP
+      this.form.pais = dados.funcionarios[0].Pais
+      this.form.fone = dados.funcionarios[0].Fone
+      this.form.salario = dados.funcionarios[0].Salario
+    })
+    .catch(error => { console.log(error) }) 
+    .finally(() => {
+      this.isLoading = false
+      console.log('Funcionol!')
+    })
+  }
 
 }
