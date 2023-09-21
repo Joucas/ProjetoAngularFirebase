@@ -20,7 +20,7 @@
         </ion-header>
         <ion-content [fullscreen]="true">
 
-          <form action="" (submit)="sendData($event)">
+          <form (submit)="sendData($event)">
             <ion-row>
               <ion-col>
                 <ion-input #input [(ngModel)]="form.nome" placeholder="Nome" name="nome"></ion-input>

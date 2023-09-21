@@ -123,13 +123,6 @@ export class FuncionariosPage {
       this.form.salario = ''
     }
 
-  // Modal update funcionarios
-  isModalOpenUpdate = false;
-
-  setOpenUpdate(isOpen: boolean) {
-    this.isModalOpenUpdate = isOpen;
-  }
-
   // Modal Inserir funcionarios
   isModalOpenInserir = false;
 
