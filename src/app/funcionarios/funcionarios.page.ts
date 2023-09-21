@@ -13,7 +13,7 @@ export class FuncionariosPage {
 
   isLoading: boolean = false
   funcionarios: any = []
-  form = {
+  form: any = {
     codigo: '',
     nome: '',
     sobrenome: '',
@@ -26,7 +26,10 @@ export class FuncionariosPage {
     pais: '',
     salario: '',
   }
-  action = 'Inserir';
+  action: string = 'Inserir'
+
+  choice: string = ''
+  searchWord: string = ''
 
   // funcao para listar os funcionarios, executo uma funcao do php e pego os dados do bd
   getFuncionarios(){
@@ -108,6 +111,18 @@ export class FuncionariosPage {
     }
 
 
+    clearForm(){
+      this.form.nome = ''
+      this.form.sobrenome = ''
+      this.form.cargo = ''
+      this.form.dataNasc = ''
+      this.form.endereco = ''
+      this.form.cep = ''
+      this.form.pais = ''
+      this.form.fone = ''
+      this.form.salario = ''
+    }
+
   // Modal update funcionarios
   isModalOpenUpdate = false;
 
@@ -126,6 +141,7 @@ export class FuncionariosPage {
       this.getData(codigo)
       this.action = 'Atualizar'
     }
+    this.clearForm()
   }
 
 
@@ -161,8 +177,24 @@ export class FuncionariosPage {
 
   // Botao de Consultar por Nome, Cargo, Cidade e Telefone
   searchData(){
-    
-  }
+    fetch('http://localhost/api/funcionarios/pesquisar.php', {
+      method: 'POST',
+      headers: {
+        'Content-type' : 'application/json',
+      },
+      body: JSON.stringify({
+        word: this.searchWord,
+        choice: this.choice
+      }),
 
+    })
+    .then(res => res.json())
+    .then(dados => { this.funcionarios = dados['funcionarios'] })
+    .catch(error => { console.log(error) }) 
+    .finally(() => {
+      this.isLoading = false
+      console.log('Funcionol!')
+    })
+  }
 
 }

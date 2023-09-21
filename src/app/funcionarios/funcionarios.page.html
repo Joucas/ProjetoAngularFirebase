@@ -77,14 +77,14 @@
 
       <form action="">
         <ion-col size="6">
-          <ion-input #input  placeholder="Pesquisar" name="pesquisar"></ion-input>
+          <ion-input #input [(ngModel)]="searchWord" placeholder="Pesquisar" name="pesquisar"></ion-input>
         </ion-col>
         <ion-col size="4">
-          <ion-radio-group>
-            <ion-radio color="success" class="ion-margin" value="nome">Nome</ion-radio>
-            <ion-radio color="success" class="ion-margin" value="cargo">Cargo</ion-radio>
-            <ion-radio color="success" class="ion-margin" value="cidade">Cidade</ion-radio>
-            <ion-radio color="success" class="ion-margin" value="fone">Telefone</ion-radio>
+            <ion-radio-group name="grupo" [(ngModel)]="choice">
+            <ion-radio name="nome" color="success" class="ion-margin" value="nome">Nome</ion-radio>
+            <ion-radio name="cargo" color="success" class="ion-margin" value="cargo">Cargo</ion-radio>
+            <ion-radio name="cidade" color="success" class="ion-margin" value="cidade">Cidade</ion-radio>
+            <ion-radio name="fone" color="success" class="ion-margin" value="fone">Telefone</ion-radio>
           </ion-radio-group>
         </ion-col>
         <ion-col size="2">
