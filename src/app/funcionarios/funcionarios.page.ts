@@ -114,6 +114,7 @@ export class FuncionariosPage {
     clearForm(){
       this.form.nome = ''
       this.form.sobrenome = ''
+      this.form.cidade = ''
       this.form.cargo = ''
       this.form.dataNasc = ''
       this.form.endereco = ''
